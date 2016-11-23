@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     var window: UIWindow?
 
+    var endpointURL: URL = URL(string: "http://localhost:8080/product/0767026128/reviews")!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -20,9 +21,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         splitViewController.delegate = self
+        //parseJSON()
         return true
     }
-
+//    func parseJSON(){
+//        print("parsing json")
+//        let task = URLSession.shared.dataTask(with: endpointURL, completionHandler:{
+//            (data, response, error) -> Void in
+//            let httpResponse = response as! HTTPURLResponse
+//            let statusCode = httpResponse.statusCode
+//            print(statusCode)
+//            if statusCode == 200{
+//                do{
+//                    let json  = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+//                    if let membersDict = json as? [String: Any]{
+//                        let members = membersDict["reviews"] as? [[String: Any]]
+//                        for member in members!{
+//                            let productId = member["product_id"] as! String
+//                            let summary = member["summary"] as! String
+//                            let rating = member["rating"] as! Int
+//                            let text = member["text"] as! String
+//                            
+//                            
+//                            var memberClass = Member(product_id: productId, summary: summary, rating: rating, text: text)
+//                            //self.objects.append(memberClass)
+//                            print(memberClass.summary)
+//                        }
+//                    }
+//                    
+//                }
+//                catch{
+//                    print("error with JSON")
+//                }
+//            }
+//        })
+//        task.resume()
+//        
+//    }
+  
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
